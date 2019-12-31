@@ -1,6 +1,4 @@
 import 'dart:convert';
-
-import 'package:cek_resimu/bloc/pilihJasaResi.dart';
 import 'package:http/http.dart' as http;
 
 class Resi {
@@ -56,13 +54,10 @@ class Resi {
         manifest: object['manifest']);
   }
 
-  static Future<Resi> getUserFromApi(String kode) async {
+  static Future<Resi> getUserFromApi(String kode, String courirCode) async {
     String apiUrl = "https://ongkir.matik.id/waybill";
-
-    PilihJasaResi pilihJasaResi = PilihJasaResi();
-
     var apiResult = await http.post(apiUrl,
-        body: {"waybill": kode, "courierCode": pilihJasaResi.initialState});
+        body: {"waybill": kode, "courierCode": courirCode});
 
     var jsonObject = json.decode(apiResult.body);
     var userData = (jsonObject as Map<String, dynamic>)['results'];

@@ -40,6 +40,9 @@ class ResiScreen extends StatelessWidget {
                         child: Icon(FontAwesomeIcons.arrowAltCircleDown)),
                     value: snap,
                     onChanged: (newValue) {
+                      print(newValue);
+                      pilihJasaResi.valueOption = newValue;
+                      print(pilihJasaResi.valueOption);
                       pilihJasaResi.add(newValue);
                     },
                     items: kodeJasaResi.map((String v) {
@@ -55,7 +58,9 @@ class ResiScreen extends StatelessWidget {
           MaterialButton(
             color: Colors.amber,
             onPressed: () {
-              resiBloc.add(textEditingController.text);
+              print(pilihJasaResi.valueOption);
+              List<String> newEvent = [textEditingController.text, pilihJasaResi.valueOption];
+              resiBloc.add(newEvent);
               Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => DetailResi()
               ));
